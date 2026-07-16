@@ -1,4 +1,4 @@
-# Leetcode Project
+# SynTx Project
 
 A full-stack LeetCode-style practice app built with Bun, React, Prisma, PostgreSQL, and Redis.
 
