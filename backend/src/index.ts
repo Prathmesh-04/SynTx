@@ -1,7 +1,7 @@
 import express from "express"
 import { SigninSchema, submissionSchema, UserSchema } from "./types/types";
 import { prisma } from "./lib/prisma";
-import { SigninQuery, SubmissionQuery, verifying } from "./queries";
+import { fetchingData, SigninQuery, SubmissionQuery, verifying } from "./queries";
 import cors from "cors";
 import session from "express-session"
 import { RedisStore } from "connect-redis";
@@ -129,20 +129,30 @@ app.post("/submission", async (req,res)=>{
         return
     }
 
-    const {userId, sourceCode, language, input} = parsedResponse.data
+    const {sourceCode, input, language} = parsedResponse.data
+    const userId = req.session.userId
+
+    if(!userId){
+        res.status(401).json({
+            message: "Unauthorised"
+        })
+        return
+    }
 
     try {
         const submission = await SubmissionQuery(userId, sourceCode, language, input)
-
+        
         console.log("Going to push in the redis")
+        
         await redis.lPush("problems", JSON.stringify({ 
             submissionId: submission.id
         }));
-
+        
         res.status(200).json({
             message:"Submission has been made to the database",
             submission
         })
+
     }catch(error){
         console.error(error)
         res.status(500).json({
@@ -152,8 +162,36 @@ app.post("/submission", async (req,res)=>{
 })
 
 
-app.get("/submission/:submissionId", (req,res)=>{
-     
+app.get("/submission/:submissionId", async (req,res)=>{
+    const id = parseInt(req.params.submissionId)
+    const data = await fetchingData(id)
+    console.log(data);
+
+    if(!data){
+        return res.status(400).json({
+            message: "No record found"
+        })
+    }
+
+    return res.status(200).json({
+        message: "Found record successfully",
+        data
+    })
+})
+
+app.post("/logout", (req,res)=>{
+    req.session.destroy((err)=>{
+        if(err){
+            console.error(err)
+            return res.status(500).json({
+                message: "Failed to logout"
+            })
+        }
+        res.clearCookie("connect.sid")
+        res.status(200).json({
+            message: "Logged out successfully"
+        })
+    })
 })
 
 

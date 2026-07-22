@@ -6,13 +6,17 @@ type TextButtonProp = ButtonHTMLAttributes<HTMLButtonElement> &{
 
 export function TextButton( {children , ...props } : TextButtonProp){
         return(
-            <button className="
+            <button {...props} className="
                 relative
                 text-zinc-400
                 transition-all
                 duration-200
-                hover:text-white
-                hover:cursor-pointer
+                enabled:hover:text-white
+                enabled:hover:cursor-pointer
+
+                disabled:cursor-not-allowed
+                disabled:text-zinc-600
+                disabled:after:scale-x-0
 
                 after:absolute
                 after:left-1/2
@@ -25,7 +29,9 @@ export function TextButton( {children , ...props } : TextButtonProp){
                 after:bg-white
                 after:transition-transform
                 after:duration-300
-                hover:after:scale-x-100
+                enabled:hover:after:scale-x-100
+
+                
                 ">{children}</button>
         )
 }

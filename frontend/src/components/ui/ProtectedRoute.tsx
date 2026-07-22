@@ -1,4 +1,5 @@
 import { me } from "@/api/auth";
+import { useCompilerStore } from "@/lib/CompilerStore";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -9,11 +10,15 @@ type ProtectedRouteProps = {
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps){
+
+    const setUsername = useCompilerStore((state)=>state.setUsername)
     const [status, setStatus] = useState<AuthStatus>("loading")
     useEffect(()=>{
         async function checkAuth(){
             try{
-                await me();
+                const user = await me();
+                console.log("Reaching here successfully : ", user)
+                setUsername(user.user.userName)
                 setStatus("authenticated")
             }catch(error){
                 console.error(error)

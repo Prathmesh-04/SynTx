@@ -11,9 +11,6 @@ type SigninData = {
     password: string
 }
 
-type meData = {
-    userId: string
-}
 export async function signup( data : SignupData ) {
     const response = await api.post("/signup" , data)
     return response.data;
@@ -27,4 +24,10 @@ export async function signin( data : SigninData ) {
 export async function me() {
     const response = await api.get("/me")
     return response.data
+}
+
+export async function logout(){
+    return await api.post("/logout",{},{
+        withCredentials:true
+    })
 }

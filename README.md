@@ -1,12 +1,12 @@
-# SynTx Project
+# SynTx
 
-A full-stack LeetCode-style practice app built with Bun, React, Prisma, PostgreSQL, and Redis.
+SynTx is a coding platform built with Bun, React, Prisma, PostgreSQL, and Redis.
 
 ## Project Structure
 
-- `frontend/` - React app with Tailwind UI for signup, auth, and the code editor experience.
-- `backend/` - Bun + Express API with Prisma and PostgreSQL.
-- `worker/` - Background worker for handling submission-related jobs.
+- `frontend/` - React app with the compiler UI, auth screens, and Monaco editor.
+- `backend/` - Bun + Express API for authentication and submission data.
+- `worker/` - Background worker that processes submission results.
 
 ## Tech Stack
 
@@ -20,15 +20,15 @@ A full-stack LeetCode-style practice app built with Bun, React, Prisma, PostgreS
 
 ## Prerequisites
 
-Before running the project, make sure you have:
+Make sure these are available before starting the app:
 
-- Bun installed
-- PostgreSQL running and configured
-- Redis running
+- Bun
+- PostgreSQL
+- Redis
 
-## Setup
+## Install
 
-Install dependencies in each app:
+Install dependencies for each package:
 
 ```bash
 cd frontend && bun install
@@ -38,13 +38,13 @@ cd ../worker && bun install
 
 ## Environment
 
-The backend expects a `DATABASE_URL` value in its environment. Check `backend/.env` for the connection string format.
+- `backend` expects `DATABASE_URL` in its environment.
+- `worker` also needs `DATABASE_URL` for Prisma.
+- Add any Redis connection values required by your local setup in the relevant package.
 
-If you are using Redis with custom settings, configure those in the relevant app before starting it.
+## Run
 
-## Running the Apps
-
-Run each service in its own terminal:
+Start each service in a separate terminal:
 
 ### Frontend
 
@@ -67,20 +67,21 @@ cd worker
 bun run index.ts
 ```
 
-## Backend Database
+## Prisma
 
-The backend uses Prisma with the schema in `backend/prisma/schema.prisma`.
-
-Useful Prisma commands:
+Useful Prisma commands for the backend and worker:
 
 ```bash
 cd backend
 bunx prisma generate
 bunx prisma migrate dev
+
+cd ../worker
+bunx prisma generate
 ```
 
 ## Notes
 
-- The frontend uses a custom dark auth UI inspired by modern deployment dashboards.
-- The backend exposes authentication and submission-related endpoints.
-- The worker is intended for asynchronous submission handling.
+- The frontend uses a custom dark compiler layout with scrollable input and output panes.
+- The backend stores users and submissions in PostgreSQL through Prisma.
+- The worker updates submission records after execution completes.

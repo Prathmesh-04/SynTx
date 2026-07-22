@@ -28,13 +28,21 @@ export async function verifying(id : string) {
 export async function SubmissionQuery(userId : string , sourceCode: string , language : string , input : string ){
 
     console.log("Going for a submission")
-    return prisma.submission.create({
+    return await prisma.submission.create({
         data: {
             language: language,
             sourceCode: sourceCode,
             status: "processing",
             input: input,
             userId: userId,
+        }
+    })
+}
+
+export async function fetchingData( id : number ){
+    return await prisma.submission.findUnique({
+        where : {
+            id: id
         }
     })
 }

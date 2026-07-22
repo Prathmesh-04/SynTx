@@ -1,6 +1,18 @@
+import { logout } from "@/api/auth"
+import { useCompilerStore } from "@/lib/CompilerStore"
+import { useNavigate } from "react-router-dom"
+
 export function NavBar(){
+
+    const username = useCompilerStore((state)=>state.username)
+    const navigate = useNavigate()
+    async function handleLogout(){
+        await logout()
+        navigate("/signin")
+    }
     return (
         <header className="
+            font-inter
             flex
             h-16
             w-full
@@ -34,11 +46,13 @@ export function NavBar(){
                 after:transition-transform
                 after:duration-300
                 hover:after:scale-x-100
-                ">Username</button>
+                ">{username}</button>
             </div>
 
             <div className="text-2xl flex gap-5 items-center">
-                <button className="
+                <button 
+                onClick={()=> window.open("https://github.com/Prathmesh-04/SynTx","_blank")}
+                className="
                 relative
                 text-zinc-400
                 transition-all
@@ -63,8 +77,8 @@ export function NavBar(){
 
                 <span>|</span>
 
-                <button className="
-           relative
+                <button onClick={handleLogout} className="
+                relative
                 text-zinc-400
                 transition-all
                 duration-200

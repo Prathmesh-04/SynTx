@@ -25,16 +25,14 @@ model Submission{
   id    Int @id @default(autoincrement())
   language        String
   sourceCode      String
-  status          SubmissionStatus
+  status          String
   input           String?
   output          String?
+  time            String?
+  memory          String?
+  compile_output  String?
+  message         String?
 
   userId          String
   user          User @relation(fields: [userId], references: [userId])
-}
-
-enum SubmissionStatus {
-  processing
-  Accepted 
-  Failed
 }

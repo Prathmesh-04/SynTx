@@ -7,15 +7,20 @@ datasource db {
   provider = "postgresql"
 }
 
-model Submission {
-  language   String
-  userId     String
-  id         Int              @id @default(autoincrement())
-  output     String?
-  sourceCode String
-  status     SubmissionStatus
-  input      String?
-  User       User             @relation(fields: [userId], references: [userId])
+model Submission{
+  id    Int @id @default(autoincrement())
+  language        String
+  sourceCode      String
+  status          String
+  input           String?
+  output          String?
+  time            String?
+  memory          String?
+  compile_output  String?
+  message         String?
+
+  userId          String
+  user          User @relation(fields: [userId], references: [userId])
 }
 
 model User {
@@ -26,8 +31,3 @@ model User {
   Submission Submission[]
 }
 
-enum SubmissionStatus {
-  processing
-  Accepted
-  Failed
-}

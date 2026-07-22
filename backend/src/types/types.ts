@@ -12,8 +12,7 @@ export const SigninSchema = z.object({
 })
 
 export const submissionSchema = z.object({
-    userId: z.string(),
     sourceCode: z.string(),
+    input: z.string(),
     language: z.string(),
-    input: z.string()
 })

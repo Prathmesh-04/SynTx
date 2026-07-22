@@ -1,17 +1,37 @@
 import { useCompilerStore } from "@/lib/CompilerStore";
 import { TextButton } from "../TextButton";
-import type { ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import type { languageModel } from "@/lib/languages";
+import { submitting } from "@/api/submission";
 
 export function EditorHeader(){
+    const content = useCompilerStore((state) => state.content)
+    const input = useCompilerStore((state) => state.input)
     const language = useCompilerStore((state) => state.language )
     const setLanguage = useCompilerStore((state) => state.setLanguage )
     const setContent = useCompilerStore((state) => state.setContent )
+    const submissionId = useCompilerStore((state) => state.submissionId )
+    const setSubmissionId = useCompilerStore((state) => state.setSubmissionId )
+    const executionResult = useCompilerStore((state) => state.executionResult)
+    const setExecutionResult = useCompilerStore((state) => state.setExecutionResult)
+
+    async function handleSubmit(){
+        if(content === "")return;
+        setExecutionResult(null);
+
+        const response = await submitting({
+            sourceCode: content,
+            input: input,
+            language: language
+        })
+
+        console.log(response)
+
+        setSubmissionId(response.submission.id)
+    }
 
     function ResetContent(){
-        console.log("Before:", useCompilerStore.getState().content )
         setContent("")
-        console.log("After:", useCompilerStore.getState().content )
     }
     return(
         <div className="border-b border-zinc-800 rounded-xl flex justify-between h-10 items-center p-6 m-2">
@@ -46,9 +66,19 @@ export function EditorHeader(){
                 </select>
             </div>
             <div className="flex gap-6">
-                <TextButton onClick={()=>{console.log("Hello am getting clicked")}}>Reset</TextButton>
+                <TextButton 
+                onClick={ResetContent} 
+                disabled={ submissionId !== -1 && !executionResult }>
+                    Reset
+                </TextButton>
+
                 <h1>|</h1>
-                <TextButton>Run</TextButton>
+
+                <TextButton
+                onClick={handleSubmit}
+                disabled={ submissionId !== -1 && !executionResult }>
+                    Run
+                </TextButton>
             </div>
         </div>
     )

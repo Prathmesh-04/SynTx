@@ -23,7 +23,7 @@ export function AuthToggle(){
           <Sparkles className="h-5 w-5 text-white" />
         </div>
         <div className="flex-1 flex-col justify-center">
-          {/* <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Leetcode</p> */}
+          
           <div className="flex relative mx-6 px-2 rounded-2xl py-0.5">
             <div className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-4xl bg-transparent transition-all duration-1000 border-white border
             ${active === "signup" ? "left-1" : "left-[calc(50%+2px)]"}`}></div>

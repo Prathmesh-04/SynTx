@@ -1,6 +1,8 @@
 import { createClient } from "redis";
 import { prisma } from "./libs/prisma";
 import axios from "axios";
+import { languages } from "../../frontend/src/lib/languages"
+import { resultSubmission } from "./libs/queries";
 
 const client = createClient()
 client.connect()
@@ -10,20 +12,35 @@ client.connect()
             if(!response){
                 continue;
             }
+
             const job = await JSON.parse(response.element)
-            console.log(job.submissionId)
-            const res = await prisma.submission.findUnique({
+            
+            const submission = await prisma.submission.findUnique({
                 where: {
                     id: job.submissionId
                 }
             })
-            console.log(res)
+
+            if(!submission){
+                console.log("Submission not found");
+                continue;
+            }
+
+            const language = languages.find( 
+                (lang) => lang.label === submission.language
+            );
+
+            console.log(language)
+            if(!language){
+                console.log("Language did not match");
+                continue;
+            }
 
             //Making the use of the API Judge 0
             const data = {
-                source_code : res?.sourceCode,
-                language_id : res?.language,
-                stdin : res?.input
+                source_code : submission.sourceCode,
+                language_id :  language.judge0Id,
+                stdin : submission.input
             }
 
             const result = await axios({
@@ -32,11 +49,19 @@ client.connect()
                 data : data
             })
 
-            const output = [result.data.stdout, result.data.status]
-
             console.log("This is the response that we are getting ")
-            console.log(output)
-            
+            console.log(result.data)
+
+            await resultSubmission(
+                job.submissionId,
+                result.data.stdout,
+                result.data.time,
+                String(result.data.memory),
+                result.data.compile_output,
+                result.data.message,
+                result.data.status.description,
+            )
+
         }
 })
 

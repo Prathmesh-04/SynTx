@@ -26,7 +26,7 @@ export function AuthLayout(){
     
                         <section className="flex items-center justify-center lg:justify-end">
                         <div
-                            className="relative w-full max-w-[520px] overflow-hidden rounded-4xl border border-white/10 bg-[#0e0e0e]/95 p-5 shadow-[0_24px_120px_rgba(0,0,0,0.55)] sm:p-6"
+                            className="relative w-full max-w-130 overflow-hidden rounded-4xl border border-white/10 bg-[#0e0e0e]/95 p-5 shadow-[0_24px_120px_rgba(0,0,0,0.55)] sm:p-6"
                         >
                             <div className="absolute right-4 top-4 h-24 w-24 rounded-full bg-cyan-400/20 blur-3xl" />
                             <div className="absolute left-6 top-20 h-28 w-28 rounded-full bg-violet-500/20 blur-3xl" />

@@ -9,9 +9,7 @@ export function App() {
   return (
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={ <Compiler /> } />
-
-            {/* <Route element={ <AuthLayout /> }>
+            <Route element={ <AuthLayout /> }>
                 <Route path="/" element={ <Signup /> } />
                 <Route path="/signin" element={ <Signin /> } />
             </Route>
@@ -23,7 +21,7 @@ export function App() {
                         <Compiler />
                     </ProtectedRoute>
                 }
-            /> */}
+            />
         </Routes>
     </BrowserRouter>
   )
