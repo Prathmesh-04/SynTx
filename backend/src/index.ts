@@ -13,7 +13,9 @@ const store = new RedisStore({
 })
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173",
+        "https://syn-tx.vercel.app/"
+    ],
     credentials: true
 }))
 
