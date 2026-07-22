@@ -32,6 +32,7 @@ app.use(session({
         maxAge: 1000*60*60*3
     }
 }))
+app.set("trust proxy", 1);
 app.use(express.json())
 
 app.post("/signup", async (req,res)=>{
