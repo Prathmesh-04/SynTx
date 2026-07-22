@@ -16,5 +16,8 @@
     "axios": "^1.18.1",
     "pg": "^8.22.0",
     "redis": "^6.1.0"
+  },
+    "scripts": {
+    "start": "bun src/index.ts"
   }
 }

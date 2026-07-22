@@ -4,7 +4,9 @@ import axios from "axios";
 import { languages } from "../../frontend/src/lib/languages"
 import { resultSubmission } from "./libs/queries";
 
-const client = createClient()
+const client = createClient({
+    url:process.env.REDIS_URL,
+})
 client.connect()
     .then(async () =>{
         while(true){
