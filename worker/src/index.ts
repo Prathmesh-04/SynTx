@@ -1,8 +1,8 @@
 import { createClient } from "redis";
 import { prisma } from "./libs/prisma";
 import axios from "axios";
-import { languages } from "../../frontend/src/lib/languages"
 import { resultSubmission } from "./libs/queries";
+import { languages } from "./libs/languages";
 
 const client = createClient({
     url:process.env.REDIS_URL,
