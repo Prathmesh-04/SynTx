@@ -27,6 +27,7 @@
     "zod": "^4.4.3"
   },
   "scripts": {
-    "dev": "bun src/index.ts"
+    "dev": "bun src/index.ts",
+    "start": "bun src/index.ts"
   }
 }
