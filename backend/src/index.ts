@@ -14,7 +14,7 @@ const store = new RedisStore({
 
 app.use(cors({
     origin: ["http://localhost:5173",
-        "https://syn-tx.vercel.app/"
+        "https://syn-tx.vercel.app"
     ],
     credentials: true
 }))
@@ -198,4 +198,8 @@ app.post("/logout", (req,res)=>{
 })
 
 
-app.listen(3000)
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
