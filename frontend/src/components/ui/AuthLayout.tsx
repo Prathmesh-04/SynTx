@@ -12,7 +12,7 @@ export function AuthLayout(){
                     <div className="relative mx-auto grid min-h-dvh max-w-7xl gap-12 px-6 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:py-16">
                         <section className="flex flex-col justify-center">
                         <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.26em] text-slate-300">
-                            Coding
+                            SynTx
                         </div>
     
                         <h1 className="max-w-2xl text-5xl font-light leading-[0.96] tracking-tight text-white sm:text-6xl lg:text-7xl">
@@ -20,7 +20,7 @@ export function AuthLayout(){
                         </h1>
     
                         <p className="mt-7 max-w-lg text-base leading-7 text-slate-300 sm:text-lg">
-                            Sign up, solve, and track your work in one focused place.
+                            Sign up and solve your work in one focused place.
                         </p>
                         </section>
     

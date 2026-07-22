@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,9 +18,22 @@ export function AuthToggle(){
 
     return(
         <div className="mb-8 flex items-center gap-3 ">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-br from-cyan-400 via-sky-500 to-indigo-500 shadow-lg shadow-sky-500/30 ">
-          <Sparkles className="h-5 w-5 text-white" />
-        </div>
+        <svg
+          className="h-11 w-11 shrink-0"
+          viewBox="0 0 64 64"
+          aria-hidden="true"
+          role="img"
+        >
+          <title>SynTx</title>
+          <path
+            d="M18 38L32 24L46 38"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
         <div className="flex-1 flex-col justify-center">
           
           <div className="flex relative mx-6 px-2 rounded-2xl py-0.5">

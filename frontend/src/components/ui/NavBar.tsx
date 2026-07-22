@@ -25,7 +25,7 @@ export function NavBar(){
             backdrop-blur-md
             ">
             <div className="text-xl flex gap-2 items-center">
-                <span className="font-light text-zinc-400">Hello, </span>
+                <span className="font-light text-zinc-400">What's up, </span>
                 <button className="
                 relative
                 font-semibold

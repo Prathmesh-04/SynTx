@@ -1,8 +1,8 @@
 import { useCompilerStore } from "@/lib/CompilerStore";
 import { TextButton } from "../TextButton";
-import { useEffect, useState, type ChangeEvent } from "react";
-import type { languageModel } from "@/lib/languages";
+import { type ChangeEvent } from "react";
 import { submitting } from "@/api/submission";
+import { getLanguageBoilerplate } from "@/lib/languages";
 
 export function EditorHeader(){
     const content = useCompilerStore((state) => state.content)
@@ -31,7 +31,7 @@ export function EditorHeader(){
     }
 
     function ResetContent(){
-        setContent("")
+        setContent(getLanguageBoilerplate(language))
     }
     return(
         <div className="border-b border-zinc-800 rounded-xl flex justify-between h-10 items-center p-6 m-2">
@@ -58,7 +58,7 @@ export function EditorHeader(){
                 ">
                 <select name="" id="" className="outline-none hover:cursor-pointer" 
                 value={language}
-                onChange={(e : ChangeEvent<HTMLSelectElement> ) => setLanguage(e.target.value as languageModel)}>
+                onChange={(e : ChangeEvent<HTMLSelectElement> ) => setLanguage(e.target.value as typeof language)}>
                     <option value="cpp">C++</option>
                     <option value="c">C</option>
                     <option value="python">Python</option>

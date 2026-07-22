@@ -1,5 +1,5 @@
 import {create} from "zustand"
-import { type languageModel } from "./languages"
+import { getLanguageBoilerplate, type languageModel } from "./languages"
 
 type outputType = {
     status : string,
@@ -32,9 +32,12 @@ type CompilerStore = {
 
 export const useCompilerStore = create<CompilerStore>((set) => ({
     language: "cpp",
-    setLanguage: (newLanguage) => set({ language : newLanguage }),
+    setLanguage: (newLanguage) => set({
+        language : newLanguage,
+        content: getLanguageBoilerplate(newLanguage),
+    }),
 
-    content: "//Hello User",
+    content: getLanguageBoilerplate("cpp"),
     setContent: (newContent) => set({content : newContent}),
 
     input: "",
