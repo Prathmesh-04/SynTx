@@ -9,7 +9,9 @@ export async function SigninQuery(keyword : string , pass : string ){
         select: {password : true , userId : true} 
     })
 
-    const check = await Bun.password.verify(pass,user?.password!)
+    if(!user) return {check: false, user: null};
+
+    const check = await Bun.password.verify(pass,user.password)
     return {check, user};
 }
 
