@@ -26,9 +26,16 @@ export function Signin() {
         })
         console.log(response)
         navigate("/compiler")
-    } catch (error) {
+    } catch (error: any) {
         console.log(error)
-        setErrorMessage("Unable to sign in to your account.")
+        const message = error?.response?.data?.message
+        if (typeof message === "string") {
+            setErrorMessage(message)
+        } else if (Array.isArray(message)) {
+            setErrorMessage(message[0]?.message ?? "Unable to sign in to your account.")
+        } else {
+            setErrorMessage("Unable to sign in to your account.")
+        }
     } finally {
         setIsSubmitting(false)
     }
