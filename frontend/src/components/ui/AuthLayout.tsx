@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { AuthToggle } from "./AuthToggle";
+import { EncryptedText } from "./encrypted-text";
 
 
 export function AuthLayout(){
@@ -20,7 +21,8 @@ export function AuthLayout(){
                         </h1>
     
                         <p className="mt-7 max-w-lg text-base leading-7 text-slate-300 sm:text-lg">
-                            Sign up and solve your work in one focused place.
+                            <EncryptedText text = "Sign up and solve your work in one focused place." />
+                            
                         </p>
                         </section>
     

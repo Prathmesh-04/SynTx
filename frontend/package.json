@@ -20,6 +20,7 @@
     "connect-redis": "^9.0.0",
     "express-session": "^1.19.0",
     "lucide-react": "^1",
+    "motion": "^13.1.0",
     "react": "^19",
     "react-dom": "^19",
     "react-router-dom": "^7.18.1",
@@ -33,6 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwind-scrollbar": "^4.0.2",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "vite": "^8.2.1"
   }
 }

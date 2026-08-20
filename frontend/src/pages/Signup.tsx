@@ -1,6 +1,7 @@
 import { signup } from "@/api/auth"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import axios from "axios"
 import { ArrowRight, Eye, EyeOff, Lock, Mail, User } from "lucide-react"
 import { useState } from "react"
 
@@ -18,15 +19,23 @@ export function Signup() {
     setIsSubmitting(true)
 
     try {
-      const response = await signup({
+      await signup({
         username,
         email,
         password,
       })
-      console.log(response)
     } catch (error) {
-      console.log(error)
-      setErrorMessage("Unable to create your account right now. Please try again.")
+      if (axios.isAxiosError(error)) {
+        if (!error.response) {
+          setErrorMessage("The server is waking up or unavailable. Please try again shortly.")
+        } else if (error.response.status === 409) {
+          setErrorMessage("This username or email already exists.")
+        } else {
+          setErrorMessage("Unable to create your account right now. Please try again.")
+        }
+      } else {
+        setErrorMessage("Something unexpected went wrong. Please try again.")
+      }
     } finally {
       setIsSubmitting(false)
     }

@@ -94,6 +94,14 @@ app.get("/me", async (req,res)=>{
     })
 })
 
+app.get("/health" , (req,res)=>{
+    try{
+        res.status(200).json({status: "ok"});
+    }catch(e){
+        res.status(500).json({status: "not ok"});
+    }
+})
+
 app.post("/signin", async (req,res)=>{
     const parsedResponse = SigninSchema.safeParse(req.body)
     if(!parsedResponse.success){

@@ -11,6 +11,11 @@ type SigninData = {
     password: string
 }
 
+export async function health(){
+    const response = await api.get("/health")
+    return response.status;
+}
+
 export async function signup( data : SignupData ) {
     const response = await api.post("/signup" , data)
     return response.data;
